@@ -1,0 +1,23 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+@import "bootswatch";
+
+html,
+body {
+    min-height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
