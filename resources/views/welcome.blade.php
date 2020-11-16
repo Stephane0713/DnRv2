@@ -13,7 +13,7 @@
                         <a href="{{route('games.create')}}">games/create</a>
                     </p>
                     <p>
-                        <a href="{{route('games.edit', ['id' => 10])}}">games/10/edit</a>
+                        <a href="{{route('games.edit', ['id' => 3])}}">games/3/edit</a>
                     </p>
                 </div>
             </div>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
     protected $table = 'videogames';
+    public $timestamps = false;
 
     public function platform()
     {
@@ -25,7 +26,7 @@ class Game extends Model
 
     public function reference()
     {
-        return $this->hasOne('App\Reference');
+        return $this->hasOne('App\Reference', 'videogame_id', 'id');
     }
 
     public function genres()

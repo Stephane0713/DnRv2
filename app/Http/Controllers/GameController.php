@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Game;
+use App\Reference;
 
 class GameController extends Controller
 {
@@ -37,11 +38,15 @@ class GameController extends Controller
         $game->idDeveloper = request('idDeveloper');
         $game->save();
 
-        $genres = request('genres');
 
+        $genres = request('genres');
         foreach ($genres as $genre) {
             $game->genres()->attach($genre);
         }
+
+        $ref = new Reference();
+        $ref->ref = "TEST";
+        $game->reference()->save($ref);
 
         return redirect('/games');
     }
@@ -69,6 +74,10 @@ class GameController extends Controller
         foreach ($genres as $genre) {
             $game->genres()->sync($genre);
         }
+
+        $ref = Reference::find($id);
+        $ref->ref = "TEST";
+        $game->reference()->save($ref);
 
         return redirect('/games');
     }
