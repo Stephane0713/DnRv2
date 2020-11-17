@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Developer;
 use Illuminate\Http\Request;
 use App\Game;
+use App\Genre;
+use App\Platform;
+use App\Publisher;
 use App\Reference;
 
 class GameController extends Controller
@@ -24,7 +28,17 @@ class GameController extends Controller
 
     public function create()
     {
-        return view('games.create');
+        $platforms = Platform::all();
+        $publishers = Publisher::all();
+        $developers = Developer::all();
+        $genres = Genre::all();
+
+        return view('games.create', [
+            'platforms' => $platforms,
+            'publishers' => $publishers,
+            'developers' => $developers,
+            'genres' => $genres
+        ]);
     }
 
     public function store()
@@ -54,8 +68,18 @@ class GameController extends Controller
     public function edit($id)
     {
         $game = Game::findOrFail($id);
+        $platforms = Platform::all();
+        $publishers = Publisher::all();
+        $developers = Developer::all();
+        $genres = Genre::all();
 
-        return view('games.edit', ['game' => $game]);
+        return view('games.edit', [
+            'game' => $game,
+            'platforms' => $platforms,
+            'publishers' => $publishers,
+            'developers' => $developers,
+            'genres' => $genres
+        ]);
     }
 
     public function update($id)
