@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Developer;
-use Illuminate\Http\Request;
 use App\Game;
 use App\Genre;
 use App\Platform;
 use App\Publisher;
 use App\Reference;
+use App\Developer;
+use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
@@ -50,6 +50,7 @@ class GameController extends Controller
         $game->idPlatform = request('idPlatform');
         $game->idPublisher = request('idPublisher');
         $game->idDeveloper = request('idDeveloper');
+
         $game->save();
 
 
@@ -57,10 +58,6 @@ class GameController extends Controller
         foreach ($genres as $genre) {
             $game->genres()->attach($genre);
         }
-
-        $ref = new Reference();
-        $ref->ref = "TEST";
-        $game->reference()->save($ref);
 
         return redirect('/games');
     }
@@ -98,10 +95,6 @@ class GameController extends Controller
         foreach ($genres as $genre) {
             $game->genres()->sync($genre);
         }
-
-        $ref = Reference::find($id);
-        $ref->ref = "TEST";
-        $game->reference()->save($ref);
 
         return redirect('/games');
     }

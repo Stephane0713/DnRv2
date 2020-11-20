@@ -11,7 +11,6 @@
         @foreach($game->genres as $genre)
         {{$genre->name}} -
         @endforeach
-        {{$game->ref}}
     </div>
 </div>
 @endsection
