@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/games', 'GameController@index')->name('games.index');
+Route::get('/games/test', 'GameController@test')->name('games.test');
 
 Route::get('/games/create', 'GameController@create')->middleware('auth')->name('games.create');
 Route::post('/games', 'GameController@store')->middleware('auth')->name('games.store');

@@ -108,4 +108,29 @@ class GameController extends Controller
 
         return redirect('/games');
     }
+
+    public function test()
+    {
+        $game = new Game;
+        $game->id = 999;
+        $game->idPlatform = 14;
+        $game->Title = 'M';
+
+        $lastCopy = Game::with(['reference' => function ($query) {
+            $query;
+        }])->where('Title', $game->Title)->where('idPlatform', $game->idPlatform)->orderBy('id', 'desc')->first();
+
+        if ($lastCopy) {
+            if (isset($lastCopy->reference) && isset($lastCopy->reference->ref)) {
+                $ref = $lastCopy->reference->ref;
+                $ref++;
+            }
+        } else {
+            $gameCount = Game::where('idPlatform', $game->idPlatform)->count();
+            $ref = ($game->platform->short . str_pad($gameCount, 3, '0', STR_PAD_LEFT) . 'A');
+        }
+
+        $test = array($game, $ref);
+        return $test;
+    }
 }
