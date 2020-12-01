@@ -65,6 +65,7 @@ class GameController extends Controller
     public function edit($id)
     {
         $game = Game::findOrFail($id);
+        $checkedGenres = $game->genres->pluck('id')->toArray();
         $platforms = Platform::all();
         $publishers = Publisher::all();
         $developers = Developer::all();
@@ -72,6 +73,7 @@ class GameController extends Controller
 
         return view('games.edit', [
             'game' => $game,
+            'checkedGenres' => $checkedGenres,
             'platforms' => $platforms,
             'publishers' => $publishers,
             'developers' => $developers,

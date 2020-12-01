@@ -40,7 +40,7 @@
     <fieldset>
         @foreach($genres as $genre)
         <div class="form-group form-check">
-            <input class="form-check-input" type="checkbox" name="genres[]" id="genre-{{$genre->id}}" value="{{$genre->id}}" {{ isset($game) ? (in_array($genre, $game->genres ) ? 'checked' : '') : '' }}>
+            <input class="form-check-input" type="checkbox" name="genres[]" id="genre-{{$genre->id}}" value="{{$genre->id}}" {{ isset($game) ? (in_array($genre->id, $checkedGenres) ? 'checked' : '') : '' }}>
             <label class="form-check-label" for="genre-{{$genre->id}}">{{$genre->name}}</label>
         </div>
         @endforeach

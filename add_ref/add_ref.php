@@ -5,7 +5,7 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbName = "videogames";
+$dbName = "sth_games";
 
 $dsn = 'mysql:host=' . $host . ';dbname=' . $dbName . ';charset=utf8';
 try {
