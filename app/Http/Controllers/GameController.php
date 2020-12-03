@@ -43,13 +43,13 @@ class GameController extends Controller
     public function store()
     {
         $game = new Game;
-        
+
         $game->Title = request('Title');
         $game->ReleaseDate = request('ReleaseDate');
         $game->idPlatform = request('idPlatform');
         $game->idPublisher = request('idPublisher');
         $game->idDeveloper = request('idDeveloper');
-        
+
         $game->save();
 
         $genres = request('genres');
@@ -107,5 +107,37 @@ class GameController extends Controller
         $game->genres()->detach($id);
 
         return redirect('/games');
+    }
+
+    public function resetAllReferences()
+    {
+
+        $plaforms = Platform::all();
+
+        foreach ($plaforms as $platform) {
+
+            $list = [];
+            $games = Game::where('idPlatform', $platform->id)->get();
+
+            $prefix = $platform->prefix;
+            $counter = 1;
+
+            foreach ($games as $game) {
+
+                $suffix = "A";
+                $counter = str_pad($counter, 3, '0', STR_PAD_LEFT);
+
+                if (array_search($game->Title, $list)) {
+                    $reference = array_key_last($list, $game->Title);
+                    $reference++;
+                } else {
+                    $reference = $prefix . $counter . $suffix;
+                    $counter++;
+                }
+                $list[$reference] = $game->Title;
+                $game->reference = $reference;
+                $game->save();
+            }
+        }
     }
 }

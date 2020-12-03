@@ -36,18 +36,20 @@
         </select>
     </div>
 
-    <div class="mb-3">Genres</div>
-    <fieldset>
-        @foreach($genres as $genre)
-        <div class="form-group form-check">
-            <input class="form-check-input" type="checkbox" name="genres[]" id="genre-{{$genre->id}}" value="{{$genre->id}}" {{ isset($game) ? (in_array($genre->id, $checkedGenres) ? 'checked' : '') : '' }}>
-            <label class="form-check-label" for="genre-{{$genre->id}}">{{$genre->name}}</label>
-        </div>
-        @endforeach
-    </fieldset>
+    <div class="container">
+        <div class="mb-3">Genres</div>
+        <fieldset class="row">
+            @foreach($genres as $genre)
+            <div class="form-group form-check my-2 mx-3 bg-secondary py-2 px-5">
+                <input class="form-check-input" type="checkbox" name="genres[]" id="genre-{{$genre->id}}" value="{{$genre->id}}" {{ isset($game) ? (in_array($genre->id, $checkedGenres) ? 'checked' : '') : '' }}>
+                <label class="form-check-label" for="genre-{{$genre->id}}">{{$genre->name}}</label>
+            </div>
+            @endforeach
+        </fieldset>
+    </div>
     @if(isset($game))
-    <input class="btn btn-warning" type="submit" value="Modifier">
+    <input class="btn btn-warning mt-5" type="submit" value="Modifier">
     @else
-    <input class="btn btn-success" type="submit" value="Créer">
+    <input class="btn btn-success mt-5" type="submit" value="Créer">
     @endif
 </form>
