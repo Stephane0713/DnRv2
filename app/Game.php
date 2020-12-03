@@ -24,11 +24,6 @@ class Game extends Model
         return $this->hasOne('App\Developer', 'id', 'idDeveloper');
     }
 
-    public function reference()
-    {
-        return $this->hasOne('App\Reference', 'videogame_id', 'id');
-    }
-
     public function genres()
     {
         return $this->belongsToMany('App\Genre', 'gamesgenres', 'idVideoGame', 'idGenre');

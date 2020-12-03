@@ -6,7 +6,6 @@ use App\Game;
 use App\Genre;
 use App\Platform;
 use App\Publisher;
-use App\Reference;
 use App\Developer;
 use Illuminate\Http\Request;
 
@@ -44,15 +43,14 @@ class GameController extends Controller
     public function store()
     {
         $game = new Game;
-
+        
         $game->Title = request('Title');
         $game->ReleaseDate = request('ReleaseDate');
         $game->idPlatform = request('idPlatform');
         $game->idPublisher = request('idPublisher');
         $game->idDeveloper = request('idDeveloper');
-
+        
         $game->save();
-
 
         $genres = request('genres');
         foreach ($genres as $genre) {
@@ -109,30 +107,5 @@ class GameController extends Controller
         $game->genres()->detach($id);
 
         return redirect('/games');
-    }
-
-    public function test()
-    {
-        $game = new Game;
-        $game->id = 999;
-        $game->idPlatform = 14;
-        $game->Title = 'M';
-
-        $lastCopy = Game::with(['reference' => function ($query) {
-            $query;
-        }])->where('Title', $game->Title)->where('idPlatform', $game->idPlatform)->orderBy('id', 'desc')->first();
-
-        if ($lastCopy) {
-            if (isset($lastCopy->reference) && isset($lastCopy->reference->ref)) {
-                $ref = $lastCopy->reference->ref;
-                $ref++;
-            }
-        } else {
-            $gameCount = Game::where('idPlatform', $game->idPlatform)->count();
-            $ref = ($game->platform->short . str_pad($gameCount, 3, '0', STR_PAD_LEFT) . 'A');
-        }
-
-        $test = array($game, $ref);
-        return $test;
     }
 }
