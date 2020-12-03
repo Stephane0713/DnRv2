@@ -21,8 +21,9 @@ class GameController extends Controller
     public function show($id)
     {
         $game = Game::findOrFail($id);
+        $test = $game->createReferences($game);
 
-        return view('games.show', ['game' => $game]);
+        return view('games.show', ['game' => $game, 'test' => $test]);
     }
 
     public function create()

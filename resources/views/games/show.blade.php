@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+{{$test}}
     <div class="card card-body mb-2">
         {{$game->Title}} -
         {{$game->ReleaseDate}} -
