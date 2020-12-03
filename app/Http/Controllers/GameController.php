@@ -139,5 +139,7 @@ class GameController extends Controller
                 $game->save();
             }
         }
+
+        return redirect('/home');
     }
 }
